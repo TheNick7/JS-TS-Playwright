@@ -1,0 +1,10 @@
+target/
+*.class
+.idea/
+*.iml
+.vscode/
+*.log
+logs/
+reports/ExecutionReport_*.html
+reports/screenshots/
+.DS_Store
