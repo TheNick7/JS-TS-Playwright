@@ -1,5 +1,7 @@
 AI glossary with a QA angle
-#	Term	Meaning	QA angle (what to test)
+
+# Term	Meaning	QA angle (what to test)
+
 1	Parameter	Learned numeric values in a model (billions+)	Not directly testable; affects capability and cost
 1	Temperature	Randomness of output (0 = near-deterministic)	Run the same prompt multiple times at 0 and at high values, then compare consistency
 2	Gen AI	AI that generates new text, images, code, and so on	Outputs are non-deterministic, so use tolerance-based checks, not exact match

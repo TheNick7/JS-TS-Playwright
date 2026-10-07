@@ -1,3 +1,5 @@
+  - name: Set up Java JDK 25
+          java-version: '25'
 name: Enterprise CRM Automation Pipeline
 
 on:
@@ -34,11 +36,11 @@ jobs:
       - name: Checkout Code Repository
         uses: actions/checkout@v4
 
-      - name: Set up Java JDK 17
+      - name: Set up Java JDK 25
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '25'
           cache: 'maven'
 
       - name: Set up Google Chrome

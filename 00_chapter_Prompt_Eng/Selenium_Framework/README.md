@@ -1,7 +1,7 @@
 # Enterprise Selenium 4 + Java + TestNG Automation Framework
 
 ![Architecture](https://img.shields.io/badge/Architecture-Page_Object_Model-blue)
-![Java](https://img.shields.io/badge/Java-17%20LTS-orange)
+![Java](https://img.shields.io/badge/Java-25%20LTS-orange)
 ![Selenium](https://img.shields.io/badge/Selenium-4.27.0-green)
 ![TestNG](https://img.shields.io/badge/TestNG-7.10.2-red)
 ![Reports](https://img.shields.io/badge/Reporting-ExtentReports%205-purple)
@@ -102,7 +102,7 @@ Selenium_Framework/
 
 ## Prerequisites
 
-- **Java Development Kit (JDK)**: Version 17 LTS or higher (compatible up to JDK 25)
+- **Java Development Kit (JDK)**: Version 25 LTS or higher
 - **Apache Maven**: Version 3.8.0 or higher
 - **Web Browsers**: Google Chrome, Mozilla Firefox, or Microsoft Edge installed
 
