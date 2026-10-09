@@ -1,0 +1,59 @@
+Q1. What is the difference between a parameter and a token? A parameter is a learned number inside the model (part of its permanent knowledge). A token is a piece of text flowing through the model during a request. Parameters set capacity; tokens set cost, speed, and limits.
+
+Q2. Why can the same prompt give different answers? Because outputs are sampled from a probability distribution; temperature, top-p/top-k, and (sometimes) nondeterministic hardware or infrastructure all add variation.
+
+Q3. How do you test non-deterministic output? Check properties, not exact text: required facts, format, length, safety, groundedness. Run multiple samples and report pass rate; use LLM or human judges for fuzzy qualities, calibrated against humans.
+
+Q4. RAG vs fine-tuning? RAG gives the model fresh knowledge at query time and can cite sources; fine-tuning changes behavior or style by updating weights. Use RAG for facts, fine-tuning for style or narrow skills, both when needed.
+
+Q5. A RAG bot gives a wrong answer. How do you debug? Check in order: (1) was the right chunk retrieved? (2) was it in the final prompt? (3) did the model use it faithfully? (4) was the source itself correct and up to date? Fix the failing layer.
+
+Q6. What is hallucination and how do you reduce it? Confident unsupported output. Reduce with RAG, strict "only from context" instructions, citations, lower temperature, output groundedness checks, abstention on unknowns, and human review for high-stakes use.
+
+Q7. How do you measure hallucination? Break answers into claims, check each against ground truth or source, compute unsupported/total. Also track citation validity and abstention on unanswerable questions.
+
+Q8. What is an embedding and why does it matter for search? A numeric representation of meaning. Search finds chunks whose vectors are near the query vector, so it matches meaning, not just keywords.
+
+Q9. Why re-embed after changing the embedding model? Different models produce incompatible vector spaces, so mixing them breaks similarity.
+
+Q10. What is a context window and what happens when it's exceeded? The max tokens per request. The app must truncate, summarize, or error. Silent truncation can drop critical instructions, so test it.
+
+Q11. What is chunking and why does it affect quality? Splitting docs into retrievable pieces. Poor splits separate rules from exceptions or dilute relevance, hurting retrieval and answers.
+
+Q12. What is a vector database and what should QA test? A store optimized for nearest-vector search with metadata. Test recall vs exact search, deletes/updates, filters, tenant isolation, latency.
+
+Q13. What is a schema and why force structured output? A contract for data shape. It makes outputs machine-validatable so downstream code does not break; validate every response and retry or fall back.
+
+Q14. What is MCP? An open standard that lets AI apps connect to tools and data via a common client/server protocol (tools, resources, prompts) instead of custom integrations.
+
+Q15. What security risks come with MCP/tools? Over-broad permissions, prompt injection via tool outputs, credential exposure, and unclear tool descriptions causing wrong calls. Use least privilege, confirmations, logging.
+
+Q16. What is an agent? Model + tools + loop. It plans, calls tools, observes results, and repeats until done or stopped.
+
+Q17. What are the top agent test risks? Loops, wrong tool/arguments, hallucinated tool results, unsafe actions without approval, runaway cost.
+
+Q18. What is a harness and why does it matter in testing? The scaffolding around the model. It affects results as much as the model; you must hold it constant when comparing models and version it.
+
+Q19. What are weights and what is "open-weight"? Weights are the learned values saved in files. Open-weight models publish them for download; they are not necessarily fully open-source (data and code may be withheld).
+
+Q20. What does attention do? Lets each token weigh the relevance of other tokens; multiple heads capture different relationships. It underlies long-range understanding but gets expensive with long contexts.
+
+Q21. What is prompt injection? Instructions smuggled into model input to override rules. Direct (user typed) or indirect (hidden in documents, web pages, tool outputs).
+
+Q22. How do you defend against prompt injection? Layered: separate data from instructions, least-privilege tools, confirmations for sensitive actions, input/output guardrails, no secrets in prompts, treat output as untrusted, ongoing red teaming.
+
+Q23. What are guardrails and what two errors do you measure? Rules/filters on inputs and outputs. Measure false negatives (bad content passes) and false positives (good content blocked).
+
+Q24. What is an eval and what makes a good eval set? A repeatable scored test suite. Good sets are diverse (happy, edge, adversarial, unanswerable), verified, versioned, include a private holdout, and run on every change.
+
+Q25. What is LLM-as-a-judge and what's the risk? Using a model to grade outputs. Risks: bias, inconsistency, errors; calibrate against human labels and spot-check.
+
+Q26. What is ground truth and how do you keep it reliable? Verified correct answers tied to sources. Use human review, two-reviewer agreement checks, versioning, and update when the product changes.
+
+Q27. What is bias testing in practice? Counterfactual tests: change only a sensitive attribute and compare outputs and refusal rates; track gaps over model versions.
+
+Q28. How do you decide if a model swap is safe? Pin versions, run the full eval suite plus safety and cost/latency checks, compare per category, review failures manually, and roll out gradually with monitoring.
+
+Q29. What would you log for an AI feature in production? Model/prompt/harness versions, inputs and outputs (privacy-safe), retrieved sources, tool calls, latency, tokens, cost, guardrail triggers, and user feedback.
+
+Q30. How do you apply anti-hallucination rules to AI-generated test cases? Ground the AI with the PRD only; require a PRD reference and excerpt for every case; "Not specified in PRD" when absent; separate generate-and-verify steps; human review gate; track assumptions in a register.
